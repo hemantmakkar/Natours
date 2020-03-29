@@ -19,7 +19,7 @@ const createSendToken = (user, statusCode, res) => {
     httpOnly: true
   };
 
-  if (process.env.NODE_ENV === 'production') cookieOptions.secure = false;
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
   // Set it to false to login user in production mode.
 
   res.cookie('jwt', token, cookieOptions);
