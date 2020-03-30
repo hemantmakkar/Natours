@@ -1,4 +1,4 @@
-const stripe = require('stripe')('sk_test_oXcuegjuxqEARGgS6h9DALSM0072h7byjA');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Tour = require('./../models/tourModel');
 const Booking = require('./../models/bookingModel');
 const catchAsync = require('./../utils/catchAsync');
