@@ -23,6 +23,8 @@ const createSendToken = (user, statusCode, req, res) => {
   };
 
   // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
   // Set it to false to login user in production mode.
 
   res.cookie('jwt', token, cookieOptions);
