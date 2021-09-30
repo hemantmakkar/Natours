@@ -9,7 +9,7 @@ process.on('uncaughtException', err => {
 });
 
 dotenv.config({ path: './config.env' });
-// console.log(process.env);
+// console.log(process);
 
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',

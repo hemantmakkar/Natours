@@ -1,4 +1,4 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const Stripe = require('stripe');
 const Tour = require('./../models/tourModel');
 const User = require('./../models/userModel');
 const Booking = require('./../models/bookingModel');
@@ -8,6 +8,8 @@ const factory = require('./handleFactory');
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   // 1) Get currently booked tour
   const tour = await Tour.findById(req.params.tourId);
+
+  const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
   // 2) Create checkout session
   const session = await stripe.checkout.sessions.create({
@@ -59,6 +61,7 @@ const createBookingCheckout = async session => {
 
 exports.webhookCheckout = (req, res, next) => {
   const signature = req.headers['stripe-signature'];
+  const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
   let event;
   try {
     event = stripe.webhooks.constructEvent(
